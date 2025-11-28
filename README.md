@@ -36,7 +36,6 @@ Fully auditable by researchers
 
 Reproducible across platforms
 
----
 
 ## ✨ What MX² does
 
@@ -210,6 +209,15 @@ confirm the MAX App uses this exact container
 write compatible implementations
 
 This provides transparency without revealing proprietary MAX-ID logic.
+
+
+## 🖥 Supported Platforms
+
+macOS
+
+Linux
+
+Windows (WSL recommended)
 
 
 ## 📚 Cryptography Standards & References
