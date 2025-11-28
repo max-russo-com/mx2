@@ -177,9 +177,9 @@ MX2:PC:V3 — binary compact version
 MX2:EX:V1 — extended eXcryption container
 
 ## 10. Test vector (example only)
-'''
+```text
 MX2:PC:V1|2sQ3QzF1zN0=|AAECAwQFBgcICQoLDA0ODxAREhM=|W7Rzuu9J6t5WZg==|p9S0P9uzp8DLiGsQmZq1zknHnNn0ZIqQ2xFZ2w==
-'''
+```
 
 This is not a real encrypted payload.
 
