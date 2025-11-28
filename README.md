@@ -31,10 +31,12 @@ It performs the following steps:
 3. Encrypts the data using **XChaCha20-Poly1305 (AEAD)**.  
 4. Produces a portable ASCII-safe string:
 
+```text
 MX2:pc:v1|xchacha20poly1305|salt_b64|nonce_b64|tag_b64|ct_b64
 
 Example internal JSON payload:
 
+```json
 {"type":"MAXREC","v":2,"ts":1730000000,"p1":"…","p2":"…"}
 
 Full specification:  
