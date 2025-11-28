@@ -33,7 +33,7 @@ XChaCha20-Poly1305 — AEAD symmetric encryption
 SHA-256 — integrity and versioning
 
 
-##2. Design goals
+## 2. Design goals
 
 Determinism — same input → same output
 
