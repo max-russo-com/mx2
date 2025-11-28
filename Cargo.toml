@@ -4,20 +4,20 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
-# Argon2id per derivare la chiave dalla password
+# Argon2id for deriving the key from the password
 argon2 = { version = "0.5", features = ["std"] }
 
-# XChaCha20-Poly1305 (MX2)
+# XChaCha20-Poly1305 (MX² core AEAD)
 chacha20poly1305 = { version = "0.10" }
 
-# Random sicuro (OsRng, shuffle, ecc.)
+# Secure randomness (OsRng, shuffle, etc.)
 rand = "0.8"
 
-# Codifica base64 per il pacchetto MX2:pc:v1
+# Base64 encoding for the MX²:PC:V1 package
 base64 = "0.21"
 
-# JSON per il payload MAXREC (p1/p2)
+# JSON encoding for the MAXREC payload (p1/p2)
 serde_json = "1"
 
-# SHA-256 per derivare i due passcode dalla password (come in Swift)
+# SHA-256 to derive the two passcodes from the password (same logic as Swift)
 sha2 = "0.10"
