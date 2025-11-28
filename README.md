@@ -20,6 +20,23 @@ These two phrases (`p1`, `p2`) allow the MAX App to deterministically reconstruc
 
 MX² is the **cryptographic foundation** of the MAX identity system.
 
+## ⭐ Features
+
+Portable ASCII-safe container
+
+Deterministic output
+
+Based exclusively on standard, well-studied cryptography
+
+Zero cloud dependency
+
+Suitable for QR encoding
+
+Fully auditable by researchers
+
+Reproducible across platforms
+
+---
 
 ## ✨ What MX² does
 
