@@ -1,4 +1,4 @@
-MX² Specification — Version 1 (MX2:PC:V1)
+# MX² Specification — Version 1 (MX2:PC:V1)
 
 Status: Draft
 Version: 1.0
