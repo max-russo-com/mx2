@@ -23,21 +23,22 @@ MX² is the **cryptographic foundation** of the MAX identity system.
 
 ## ✨ What MX² does
 
-MX² transforms **one user password** into a secure cryptographic container.  
+MX² transforms one user password into a secure cryptographic container.
 It performs the following steps:
 
-1. Derives **two internal passcodes** from the password (via SHA-256).  
-2. Hardens the password using **Argon2id** (64 MiB, 3 iterations).  
-3. Encrypts the data using **XChaCha20-Poly1305 (AEAD)**.  
-4. Produces a portable ASCII-safe string:
+Derives two internal passcodes from the password (via SHA-256).
 
-```text
+Hardens the password using Argon2id (64 MiB, 3 iterations).
+
+Encrypts the data using XChaCha20-Poly1305 (AEAD).
+
+Produces a portable ASCII-safe string:
+
 MX2:pc:v1|xchacha20poly1305|salt_b64|nonce_b64|tag_b64|ct_b64
 
 Example internal JSON payload:
 
-```json
 {"type":"MAXREC","v":2,"ts":1730000000,"p1":"…","p2":"…"}
 
-Full specification:  
-👉 **[SPEC_MX2_v1.md](./SPEC_MX2_v1.md)**
+Full specification:
+👉 SPEC_MX2_v1.md
