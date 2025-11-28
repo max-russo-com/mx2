@@ -41,3 +41,32 @@ Example internal JSON payload:
 
 Full specification:  
 👉 [SPEC_MX2_v1.md](./SPEC_MX2_v1.md)
+
+
+## 🔧 High-level design
+
+The MX² container is constructed through the following steps:
+
+password
+  ↓
+SHA-256 hex
+  ↓
+derive two passcodes
+  ↓
+Argon2id + salt  →  key32
+  ↓
+XChaCha20-Poly1305 (AEAD)
+  ↓
+salt + nonce + authenticated ciphertext
+  ↓
+MX2:pc:v1 container
+```
+
+MX² guarantees:
+
+- **Determinism**  
+- **Portability**  
+- **Auditability**  
+- **Modern cryptographic primitives**  
+- **Independence from the internal MAX-ID logic**
+
