@@ -224,3 +224,16 @@ https://datatracker.ietf.org/doc/rfc5116/
 https://datatracker.ietf.org/doc/rfc4648/
 
 All cryptographic components used by MX² are open, standardized, and independently verifiable.
+
+
+## 📄 License
+
+This project is released under the MIT License.
+See the LICENSE file for details.
+
+## Author
+
+Massimo Russo
+https://www.max-russo.com
+
+MAX Ecosystem: PQC Login, PQC Chat, MAX Lock, MAX Signature, MAX Prime, MX², MAX OS.
