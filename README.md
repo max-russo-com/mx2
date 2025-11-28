@@ -118,7 +118,7 @@ at least 3 symbols
 
 MX² uses modern, well-studied cryptographic primitives.
 
-## Password Hardening — Argon2id
+**Password Hardening — Argon2id**
 
 memory: 64 MiB
 
@@ -128,7 +128,7 @@ lanes: 1
 
 output: 32 bytes
 
-## AEAD Encryption — XChaCha20-Poly1305
+**AEAD Encryption — XChaCha20-Poly1305**
 
 nonce: 24 bytes
 
@@ -136,7 +136,7 @@ tag: 16 bytes
 
 AAD: "MAX|MX2|pc|v1"
 
-## Randomness
+**Randomness**
 
 Salt: 16 bytes
 
@@ -144,7 +144,7 @@ Nonce: 24 bytes
 
 RNG: OsRng
 
-## Security properties
+**Security properties**
 
 Fully authenticated encryption
 
@@ -199,28 +199,28 @@ This provides transparency without revealing proprietary MAX-ID logic.
 
 MX² relies exclusively on standard, verifiable cryptographic primitives.
 
-## Argon2id (Password Hardening)
+**Argon2id (Password Hardening)**
 https://datatracker.ietf.org/doc/draft-irtf-cfrg-argon2/
 
 https://github.com/P-H-C/phc-winner-argon2
 
-## XChaCha20-Poly1305 (AEAD Encryption)
+**XChaCha20-Poly1305 (AEAD Encryption)**
 https://datatracker.ietf.org/doc/rfc8439/
 
 https://datatracker.ietf.org/doc/draft-irtf-cfrg-xchacha/
 
 https://cr.yp.to/chacha.html
 
-## Poly1305 MAC
+**Poly1305 MAC**
 https://cr.yp.to/mac/poly1305-20050329.pdf
 
-## SHA-256 (Hash Function)
+**SHA-256 (Hash Function)**
 https://csrc.nist.gov/publications/detail/fips/180/4/final
 
-## AEAD — Authenticated Encryption with Associated Data
+**AEAD — Authenticated Encryption with Associated Data**
 https://datatracker.ietf.org/doc/rfc5116/
 
-## Base64 Encoding
+**Base64 Encoding**
 https://datatracker.ietf.org/doc/rfc4648/
 
 All cryptographic components used by MX² are open, standardized, and independently verifiable.
