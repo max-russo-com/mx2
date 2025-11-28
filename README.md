@@ -33,6 +33,7 @@ It performs the following steps:
 
 ```text
 MX2:pc:v1\|xchacha20poly1305\|salt_b64\|nonce_b64\|tag_b64\|ct_b64
+```text
 
 Example internal JSON payload:
 
