@@ -70,3 +70,165 @@ MX² guarantees:
 - Auditability  
 - Modern cryptographic primitives  
 - Independence from the internal MAX-ID logic
+
+📁 Repository contents
+
+src/main.rs — command-line demo tool
+
+SPEC_MX2_v1.md — technical specification for MX²
+
+Cargo.toml — Rust crate definition
+
+LICENSE — MIT license
+
+.gitignore — Rust standard ignores
+
+🧪 CLI Demo (Rust)
+
+This repository includes a small command-line tool that demonstrates how MX² works.
+
+You can build and run it with:
+
+```
+git clone https://github.com/max-russo-com/mx2.git
+cd mx2
+cargo run
+```
+
+After running the tool, you will see a menu:
+
+Option 1: generate two new secret phrases and create an encrypted MX² backup
+
+Option 2: decrypt an existing MX² backup and recover the stored phrases
+
+The demo enforces the same password policy as the MAX App:
+
+at least 14 characters
+
+at least 1 lowercase
+
+at least 1 uppercase
+
+at least 3 digits
+
+at least 3 symbols
+
+🔐 Security Notes
+
+MX² uses modern, well-studied cryptographic primitives.
+
+Password Hardening — Argon2id
+
+memory: 64 MiB
+
+iterations: 3
+
+lanes: 1
+
+output: 32 bytes
+
+AEAD Encryption — XChaCha20-Poly1305
+
+nonce: 24 bytes
+
+tag: 16 bytes
+
+AAD: "MAX|MX2|pc|v1"
+
+Randomness
+
+Salt: 16 bytes
+
+Nonce: 24 bytes
+
+RNG: OsRng
+
+Security properties
+
+Fully authenticated encryption
+
+Stateless format
+
+No server involved
+
+No key material leaves the device
+
+MX² is a secure building block, not a standalone key manager.
+
+📱 Compatibility with the MAX App
+
+The MAX App uses MX² to store and recover two secret phrases locally.
+
+This repository implements the exact same container format:
+
+SHA-256 → internal passcodes
+
+Argon2id parameters
+
+XChaCha20-Poly1305 AEAD
+
+Header MX2:pc:v1
+
+JSON MAXREC payload
+
+This allows full independent verification.
+
+🔍 Independent verification
+
+Researchers can:
+
+inspect the MX² format
+
+verify Argon2id parameters
+
+reproduce MX² containers
+
+decrypt MAXREC payloads
+
+confirm the MAX App uses this exact container
+
+write compatible implementations
+
+This provides transparency without revealing proprietary MAX-ID logic.
+
+📚 Cryptography Standards & References
+
+MX² relies exclusively on standard, verifiable cryptographic primitives.
+
+Argon2id (Password Hardening)
+https://datatracker.ietf.org/doc/draft-irtf-cfrg-argon2/
+
+https://github.com/P-H-C/phc-winner-argon2
+
+XChaCha20-Poly1305 (AEAD Encryption)
+https://datatracker.ietf.org/doc/rfc8439/
+
+https://datatracker.ietf.org/doc/draft-irtf-cfrg-xchacha/
+
+https://cr.yp.to/chacha.html
+
+Poly1305 MAC
+https://cr.yp.to/mac/poly1305-20050329.pdf
+
+SHA-256 (Hash Function)
+https://csrc.nist.gov/publications/detail/fips/180/4/final
+
+AEAD — Authenticated Encryption with Associated Data
+https://datatracker.ietf.org/doc/rfc5116/
+
+Base64 Encoding
+https://datatracker.ietf.org/doc/rfc4648/
+
+All cryptographic components used by MX² are open, standardized, and independently verifiable.
+
+📄 License
+
+This project is released under the MIT License.
+See the LICENSE file for details.
+
+Author
+
+Massimo Russo
+https://www.max-russo.com
+
+MAX Ecosystem: PQC Login, PQC Chat, MAX Lock, MAX Signature, MAX Prime, MX², MAX OS.
