@@ -1,9 +1,13 @@
 # MX² Specification — Version 1 (MX2:PC:V1)
 
 Status: Draft
+
 Version: 1.0
+
 Author: Massimo Russo
+
 Last update: 2025-12
+
 License: To be defined
 
 ## 1. Introduction
