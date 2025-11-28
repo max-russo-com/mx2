@@ -47,6 +47,7 @@ Full specification:
 
 The MX² container is constructed through the following steps:
 
+````
 password
   ↓
 SHA-256 hex
@@ -60,13 +61,12 @@ XChaCha20-Poly1305 (AEAD)
 salt + nonce + authenticated ciphertext
   ↓
 MX2:pc:v1 container
-```
+````
 
 MX² guarantees:
 
-- **Determinism**  
-- **Portability**  
-- **Auditability**  
-- **Modern cryptographic primitives**  
-- **Independence from the internal MAX-ID logic**
-
+- Determinism  
+- Portability  
+- Auditability  
+- Modern cryptographic primitives  
+- Independence from the internal MAX-ID logic
