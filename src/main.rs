@@ -12,7 +12,7 @@ use serde_json::json;
 
 type Result<T> = std::result::Result<T, String>;
 
-// ====== Derivazione chiave Argon2id (come nella MAX App) ======
+// ====== Argon2id key derivation (same as in the MAX App) ======
 
 fn a2_key_from_passcodes(p1: &str, p2: &str, salt: &[u8]) -> [u8; 32] {
     let params = Params::new(64 * 1024, 3, 1, Some(32)).expect("argon2 params");
@@ -27,7 +27,7 @@ fn a2_key_from_passcodes(p1: &str, p2: &str, salt: &[u8]) -> [u8; 32] {
     out
 }
 
-// === SHA-256 hex (come in Swift: sha256Hex) ===
+// === SHA-256 hex (same as Swift: sha256Hex) ===
 fn sha256_hex(s: &str) -> String {
     let mut hasher = Sha256::new();
     hasher.update(s.as_bytes());
@@ -35,7 +35,7 @@ fn sha256_hex(s: &str) -> String {
     hash.iter().map(|b| format!("{:02x}", b)).collect()
 }
 
-// === Deriva i due passcode interni da UNA sola password (stessa logica Swift) ===
+// === Derive two internal passcodes from ONE password (same logic as Swift) ===
 fn derive_two_passcodes_from_pwd(pwd: &str) -> (String, String) {
     let hex = sha256_hex(pwd);
     let (first8, _) = hex.split_at(8.min(hex.len()));
@@ -46,9 +46,9 @@ fn derive_two_passcodes_from_pwd(pwd: &str) -> (String, String) {
     (p1, p2)
 }
 
-// ====== MX2: cifratura / decifratura compatibili con lib.rs ======
+// ====== MX2: encrypt / decrypt compatible with lib.rs ======
 
-/// CIFRATURA MX2 (2 passcode derivati) — formato identico a MAX App:
+/// MX2 ENCRYPTION (2 derived passcodes) — format identical to the MAX App:
 /// MX2:pc:v1|xchacha20poly1305|salt_b64|nonce_b64|tag_b64|ct_b64
 fn encrypt_phrase(plain: &str, p1: &str, p2: &str) -> Result<String> {
     let mut salt  = [0u8; 16];
@@ -65,7 +65,7 @@ fn encrypt_phrase(plain: &str, p1: &str, p2: &str) -> Result<String> {
         .encrypt(XNonce::from_slice(&nonce), Payload { msg: plain.as_bytes(), aad })
         .map_err(|_| "aead-encrypt-failed".to_string())?;
 
-    // separa ciphertext e tag (ultimi 16 byte)
+    // split ciphertext and tag (last 16 bytes)
     let (ct, tag) = ct_tag.split_at(ct_tag.len().saturating_sub(16));
 
     Ok(format!(
@@ -77,7 +77,7 @@ fn encrypt_phrase(plain: &str, p1: &str, p2: &str) -> Result<String> {
     ))
 }
 
-/// DECIFRATURA MX2 (2 passcode derivati) — stessa logica del core
+/// MX2 DECRYPTION (2 derived passcodes) — same logic as the core
 fn decrypt_phrase(packet: &str, p1: &str, p2: &str) -> Result<String> {
     if packet.to_ascii_uppercase().starts_with("MX2:") {
         let parts: Vec<&str> = packet.split('|').collect();
@@ -118,7 +118,7 @@ fn decrypt_phrase(packet: &str, p1: &str, p2: &str) -> Result<String> {
     Err("not-an-MX2-packet".into())
 }
 
-// ====== Frasi random (simile a generateRandomPhrase di Swift) ======
+// ====== Random phrases (similar to generateRandomPhrase in Swift) ======
 
 fn generate_random_phrase(len: usize) -> String {
     const LETTERS: &[u8] = b"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -130,12 +130,12 @@ fn generate_random_phrase(len: usize) -> String {
 
     let all: Vec<u8> = [LETTERS, DIGITS, SYMBOLS].concat();
 
-    // riempi con caratteri casuali
+    // fill with random characters
     for _ in 0..len {
         out.push(all[(rng.next_u32() as usize) % all.len()]);
     }
 
-    // forza almeno 3 numeri e 3 simboli
+    // force at least 3 digits and 3 symbols
     for _ in 0..3 {
         let pos = (rng.next_u32() as usize) % len;
         out[pos] = DIGITS[(rng.next_u32() as usize) % DIGITS.len()];
@@ -145,13 +145,13 @@ fn generate_random_phrase(len: usize) -> String {
         out[pos] = SYMBOLS[(rng.next_u32() as usize) % SYMBOLS.len()];
     }
 
-    // shuffle finale
+    // final shuffle
     out.shuffle(&mut rng);
 
     String::from_utf8(out).unwrap()
 }
 
-// ====== Password: policy minima (come nell’app) ======
+// ====== Password: minimum policy (same as the app) ======
 
 fn password_stats(s: &str) -> (usize, usize, usize, usize, usize) {
     let mut up = 0;
@@ -167,13 +167,13 @@ fn password_stats(s: &str) -> (usize, usize, usize, usize, usize) {
     (s.chars().count(), up, lo, di, sy)
 }
 
-/// Stessa regola spiegata all’utente: ≥14, 1 maiuscola, 1 minuscola, 3 numeri, 3 simboli
+/// Same rule shown to the user: ≥14 chars, 1 uppercase, 1 lowercase, 3 digits, 3 symbols
 fn meets_minimum_policy(p: &str) -> bool {
     let (len, up, lo, di, sy) = password_stats(p);
     len >= 14 && up >= 1 && lo >= 1 && di >= 3 && sy >= 3
 }
 
-// ====== Plain text per backup (JSON come nell’app) ======
+// ====== Plain text for backup (JSON, same as the app) ======
 
 fn build_recovery_plain(phrase1: &str, phrase2: &str) -> String {
     use std::time::{SystemTime, UNIX_EPOCH};
@@ -189,7 +189,7 @@ fn build_recovery_plain(phrase1: &str, phrase2: &str) -> String {
 }
 
 fn parse_recovery_plain(s: &str) -> Option<(String, String)> {
-    // Prova JSON
+    // Try JSON
     if let Ok(val) = serde_json::from_str::<serde_json::Value>(s) {
         if val.get("type")?.as_str()? == "MAXREC" {
             let p1 = val.get("p1")?.as_str()?.to_string();
@@ -200,7 +200,7 @@ fn parse_recovery_plain(s: &str) -> Option<(String, String)> {
         }
     }
 
-    // Fallback stile testo
+    // Fallback: plain text style
     if let Some(start) = s.find("P1:\n") {
         if let Some(mid) = s[start+4..].find("P2:\n") {
             let p1 = &s[start+4 .. start+4+mid];
@@ -215,7 +215,7 @@ fn parse_recovery_plain(s: &str) -> Option<(String, String)> {
     None
 }
 
-// ====== I/O di base ======
+// ====== Basic I/O ======
 
 fn read_line(prompt: &str) -> Result<String> {
     print!("{}", prompt);
@@ -230,80 +230,80 @@ fn read_line(prompt: &str) -> Result<String> {
 // ====== MAIN ======
 
 fn main() {
-    println!("=== MAX MX2 Open Demo (UNA sola password, compatibile con MAX App) ===\n");
-    println!("Questo tool usa la stessa MX2 dell’app (Argon2id + XChaCha20-Poly1305, header MX2:pc:v1).");
-    println!("Dietro le quinte ci sono DUE passcode, ma qui inserisci UNA sola password.\n");
-    println!("Scegli cosa vuoi fare:");
-    println!("  1) Genera due frasi nuove e crea il backup cifrato");
-    println!("  2) Decifra un backup MX2 ed estrai le due frasi\n");
+    println!("=== MAX MX2 Open Demo (ONE password, compatible with the MAX App) ===\n");
+    println!("This tool uses the same MX2 container as the MAX App (Argon2id + XChaCha20-Poly1305, header MX2:pc:v1).");
+    println!("Behind the scenes there are TWO internal passcodes, but here you type only ONE password.\n");
+    println!("Choose what you want to do:");
+    println!("  1) Generate two new phrases and create an encrypted backup");
+    println!("  2) Decrypt an MX2 backup and extract the two phrases\n");
 
     let choice = loop {
-        let s = read_line("Digita 1 o 2 e premi Invio: ").unwrap_or_default();
+        let s = read_line("Type 1 or 2 and press Enter: ").unwrap_or_default();
         match s.trim() {
             "1" | "2" => break s.trim().to_string(),
             _ => {
-                println!("Per favore digita solo 1 oppure 2.\n");
+                println!("Please type only 1 or 2.\n");
             }
         }
     };
 
-    // 1) Chiedi UNA sola password, con la stessa policy dell’app
+    // 1) Ask for ONE password, with the same policy as the app
     let password = loop {
-        let p = read_line("Password (>=14 caratteri, 1 minuscola, 1 MAIUSCOLA, 3 numeri, 3 simboli): ")
+        let p = read_line("Password (>=14 chars, 1 lowercase, 1 UPPERCASE, 3 digits, 3 symbols): ")
             .unwrap_or_default();
         if !meets_minimum_policy(&p) {
-            println!("❌ Password troppo debole o non conforme ai requisiti.\n");
+            println!("❌ Password too weak or not compliant with the requirements.\n");
             continue;
         }
-        println!("✔️ Password accettata.\n");
+        println!("✔️ Password accepted.\n");
         break p;
     };
 
     let (pass1, pass2) = derive_two_passcodes_from_pwd(&password);
 
     if choice == "1" {
-        // ===== Modalità 1: genera frasi e cifra =====
-        println!("Generazione di 2 frasi casuali da 80 caratteri…");
+        // ===== Mode 1: generate phrases and encrypt =====
+        println!("Generating 2 random phrases of 80 characters…");
 
         let phrase1 = generate_random_phrase(80);
         let phrase2 = generate_random_phrase(80);
 
-        println!("\nFrase 1:\n{}\n", phrase1);
-        println!("Frase 2:\n{}\n", phrase2);
+        println!("\nPhrase 1:\n{}\n", phrase1);
+        println!("Phrase 2:\n{}\n", phrase2);
 
         let plain = build_recovery_plain(&phrase1, &phrase2);
 
         match encrypt_phrase(&plain, &pass1, &pass2) {
             Ok(cipher) => {
-                println!("=== BACKUP MX2 DA SALVARE / IMPORTARE NELL’APP ===\n");
+                println!("=== MX2 BACKUP TO SAVE / IMPORT INTO THE APP ===\n");
                 println!("{cipher}\n");
-                println!("Puoi copiare questo testo e:");
-                println!("- salvarlo in un file di testo sicuro;");
-                println!("- generare un QR (come fa l’app) e stamparlo;");
-                println!("- incollarlo nella MAX App per verificare che venga decifrato.\n");
+                println!("You can copy this text and:");
+                println!("- save it to a secure text file;");
+                println!("- generate a QR code (like the app does) and print it;");
+                println!("- paste it into the MAX App to verify that it decrypts.\n");
             }
             Err(e) => {
-                eprintln!("Errore in cifratura: {e}");
+                eprintln!("Encryption error: {e}");
             }
         }
     } else {
-        // ===== Modalità 2: decifra un backup esistente =====
-        println!("Incolla qui sotto il testo cifrato (riga MX2:pc:v1|...):\n");
-        let cipher = read_line("Cipher MX2: ").unwrap_or_default();
+        // ===== Mode 2: decrypt an existing backup =====
+        println!("Paste the encrypted text below (line starting with MX2:pc:v1|...):\n");
+        let cipher = read_line("MX2 cipher: ").unwrap_or_default();
 
         match decrypt_phrase(&cipher, &pass1, &pass2) {
             Ok(plain) => {
-                println!("\nTesto decifrato (plain):\n{}\n", plain);
+                println!("\nDecrypted plain text:\n{}\n", plain);
                 if let Some((p1, p2)) = parse_recovery_plain(&plain) {
-                    println!("=== FRASI ESTRATTE DAL BACKUP ===\n");
-                    println!("Frase 1:\n{}\n", p1);
-                    println!("Frase 2:\n{}\n", p2);
+                    println!("=== PHRASES EXTRACTED FROM BACKUP ===\n");
+                    println!("Phrase 1:\n{}\n", p1);
+                    println!("Phrase 2:\n{}\n", p2);
                 } else {
-                    println!("Non sono riuscito a estrarre p1/p2 dal testo (formato inatteso).");
+                    println!("Could not extract p1/p2 from the text (unexpected format).");
                 }
             }
             Err(e) => {
-                eprintln!("Errore in decifratura: {e}");
+                eprintln!("Decryption error: {e}");
             }
         }
     }
