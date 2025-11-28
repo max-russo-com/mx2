@@ -1,0 +1,52 @@
+# ============================
+# Generic
+# ============================
+.DS_Store
+Thumbs.db
+*.log
+*.tmp
+*.temp
+*.swp
+*.swo
+
+# Ignore editor backups
+*~
+*.bak
+
+# ============================
+# Python
+# ============================
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.env
+.venv
+env/
+venv/
+pip-log.txt
+
+# ============================
+# Rust / Cargo
+# ============================
+/target/
+/Cargo.lock  # optional for libraries
+**/*.rs.bk
+
+# ============================
+# Build artifacts
+# ============================
+build/
+dist/
+out/
+
+# ============================
+# IDE / Editors
+# ============================
+.vscode/
+.idea/
+
+# ============================
+# OS metadata
+# ============================
+*.orig
