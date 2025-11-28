@@ -6,7 +6,7 @@ Author: Massimo Russo
 Last update: 2025-12
 License: To be defined
 
-1. Introduction
+## 1. Introduction
 
 MX² (“MAX to eXcryption”) is a deterministic cryptographic container
 designed to protect high-entropy secrets and make them portable across devices,
@@ -32,7 +32,8 @@ XChaCha20-Poly1305 — AEAD symmetric encryption
 
 SHA-256 — integrity and versioning
 
-2. Design goals
+
+##2. Design goals
 
 Determinism — same input → same output
 
@@ -46,7 +47,8 @@ Minimalism — no unnecessary metadata
 
 Independence — reveals nothing about MAX-ID logic
 
-3. Format overview
+
+## 3. Format overview
 
 An MX² container has the following structure (Version 1):
 
@@ -55,8 +57,9 @@ MX2:PC:V1|salt_b64|nonce_b64|tag_b64|ciphertext_b64
 
 Fields are separated by the ASCII | character.
 
-4. Field definitions
-4.1 Header
+
+## 4. Field definitions
+**4.1 Header**
 
 Literal: MX2:PC:V1
 
@@ -68,7 +71,7 @@ PC → Portable Container
 
 V1 → version 1
 
-4.2 salt_b64
+**4.2 salt_b64**
 
 Base64-encoded salt for Argon2id
 
@@ -76,7 +79,7 @@ Length: 16–32 bytes (recommended: 16)
 
 MUST be unique per container
 
-4.3 nonce_b64
+**4.3 nonce_b64**
 
 Base64-encoded
 
@@ -84,19 +87,19 @@ Base64-encoded
 
 MUST NOT repeat for the same key
 
-4.4 tag_b64
+**4.4 tag_b64**
 
 Base64-encoded
 
 16 bytes authentication tag
 
-4.5 ciphertext_b64
+**4.5 ciphertext_b64**
 
 Base64-encoded ciphertext
 
 Contains encrypted JSON
 
-5. Internal encrypted payload
+## 5. Internal encrypted payload
 
 The decrypted payload MUST be JSON.
 Recommended schema:
@@ -120,17 +123,17 @@ meta is optional
 
 Version SHOULD be included for future migrations
 
-6. Cryptographic process
-6.1 Deriving the key
+## 6. Cryptographic process
+**6.1 Deriving the key**
 key = Argon2id(phrases, salt, memory=64MiB, iterations=3, parallelism=1)
 
-6.2 Encryption
+**6.2 Encryption**
 ciphertext, tag = XChaCha20-Poly1305(key, nonce, plaintext)
 
-6.3 Assembly
+**6.3 Assembly**
 header | salt_b64 | nonce_b64 | tag_b64 | ciphertext_b64
 
-7. Determinism
+## 7. Determinism
 
 MX² is deterministic when:
 
@@ -146,7 +149,7 @@ MX² for identity regeneration → deterministic
 
 MX² for Chat messaging → non-deterministic (uses FrodoKEM)
 
-8. Security considerations
+## 8. Security considerations
 
 MX² does NOT contain private keys
 
@@ -160,7 +163,7 @@ Rotate MX² if passphrases change
 
 Uses only proven primitives (Argon2id + XChaCha20-Poly1305)
 
-9. Compatibility
+## 9. Compatibility
 Current version
 
 MX2:PC:V1
@@ -173,13 +176,14 @@ MX2:PC:V3 — binary compact version
 
 MX2:EX:V1 — extended eXcryption container
 
-10. Test vector (example only)
+## 10. Test vector (example only)
+'''
 MX2:PC:V1|2sQ3QzF1zN0=|AAECAwQFBgcICQoLDA0ODxAREhM=|W7Rzuu9J6t5WZg==|p9S0P9uzp8DLiGsQmZq1zknHnNn0ZIqQ2xFZ2w==
-
+'''
 
 This is not a real encrypted payload.
 
-11. Reference implementations
+## 11. Reference implementations
 
 Rust implementation (coming soon)
 
@@ -187,7 +191,7 @@ Swift implementation (inside MAX App)
 
 Python validator (planned)
 
-12. Changelog
+## 12. Changelog
 
 v1.0 — Draft
 
