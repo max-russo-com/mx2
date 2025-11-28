@@ -103,7 +103,7 @@ Contains encrypted JSON
 
 The decrypted payload MUST be JSON.
 Recommended schema:
-
+```
 {
   "version": 1,
   "phrases": "…",
@@ -113,7 +113,7 @@ Recommended schema:
     "format": "MX2:PC:V1"
   }
 }
-
+```
 
 Notes:
 
