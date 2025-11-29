@@ -218,7 +218,6 @@ You can install the MAX App Beta here:
 
 👉 **https://testflight.apple.com/join/pc6PdFz5**
 
-*(The app is currently in Apple's review process. The link becomes active as soon as Apple approves the build.)*
 
 
 #### ✔️ Test 1 — Encrypt on desktop → decrypt in MAX App  
