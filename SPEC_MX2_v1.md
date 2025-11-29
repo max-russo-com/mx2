@@ -14,46 +14,47 @@ QR codes, backups and recovery flows.
 
 It is the foundation layer (“Level 2”) of the MAX ecosystem and is used for:
 
-storing the internal secret that regenerates MAX-ID
+- storing the internal secret that regenerates MAX-ID
 
-deriving deterministic SPHINCS+ keypairs (Login)
+- deriving deterministic SPHINCS+ keypairs (Login)
 
-deriving deterministic FrodoKEM keypairs (Chat)
+- deriving deterministic FrodoKEM keypairs (Chat)
 
-encrypting local user data (Lock)
+- encrypting local user data (Lock)
 
-providing a verifiable structure for external auditors
+- providing a verifiable structure for external auditors
 
 The MX² container is built on strong, well-studied primitives:
 
-Argon2id — memory-hard key derivation
+• Argon2id — memory-hard key derivation
 
-XChaCha20-Poly1305 — AEAD symmetric encryption
+• XChaCha20-Poly1305 — AEAD symmetric encryption
 
-SHA-256 — integrity and versioning
+• SHA-256 — integrity and versioning
 
 
 ## 2. Design goals
 
-Determinism — same input → same output
+- **Determinism** — same input → same output
 
-Portability — works as string, file, QR
+- **Portability** — works as string, file, QR
 
-Transparency — all fields are inspectable
+- **Transparency** — all fields are inspectable
 
-Security — modern, audit-ready primitives
+- **Security** — modern, audit-ready primitives
 
-Minimalism — no unnecessary metadata
+- **Minimalism** — no unnecessary metadata
 
-Independence — reveals nothing about MAX-ID logic
+- **Independence** — reveals nothing about MAX-ID logic
 
 
 ## 3. Format overview
 
 An MX² container has the following structure (Version 1):
 
+```text
 MX2:PC:V1|salt_b64|nonce_b64|tag_b64|ciphertext_b64
-
+```
 
 Fields are separated by the ASCII | character.
 
@@ -65,39 +66,39 @@ Literal: MX2:PC:V1
 
 Meaning:
 
-MX2 → format family
+• MX2 → format family
 
-PC → Portable Container
+• PC → Portable Container
 
-V1 → version 1
+• V1 → version 1
 
 **4.2 salt_b64**
 
-Base64-encoded salt for Argon2id
+• Base64-encoded salt for Argon2id
 
-Length: 16–32 bytes (recommended: 16)
+• Length: 16–32 bytes (recommended: 16)
 
-MUST be unique per container
+• MUST be unique per container
 
 **4.3 nonce_b64**
 
-Base64-encoded
+• Base64-encoded
 
-24 bytes (XChaCha20)
+• 24 bytes (XChaCha20)
 
-MUST NOT repeat for the same key
+• MUST NOT repeat for the same key
 
 **4.4 tag_b64**
 
-Base64-encoded
+• Base64-encoded
 
-16 bytes authentication tag
+• 16 bytes authentication tag
 
 **4.5 ciphertext_b64**
 
-Base64-encoded ciphertext
+• Base64-encoded ciphertext
 
-Contains encrypted JSON
+• Contains encrypted JSON
 
 ## 5. Internal encrypted payload
 
@@ -117,11 +118,11 @@ Recommended schema:
 
 Notes:
 
-phrases contains the high-entropy secret
+- phrases contains the high-entropy secret
 
-meta is optional
+- meta is optional
 
-Version SHOULD be included for future migrations
+- Version SHOULD be included for future migrations
 
 ## 6. Cryptographic process
 **6.1 Deriving the key**
