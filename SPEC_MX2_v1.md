@@ -8,7 +8,7 @@ License: To be defined
 
 ## 1. Introduction
 
-MX² (“MAX to eXcryption”) is a deterministic cryptographic container
+MX² (“MAX 2 eXcryption”) is a deterministic cryptographic container
 designed to protect high-entropy secrets and make them portable across devices,
 QR codes, backups and recovery flows.
 
