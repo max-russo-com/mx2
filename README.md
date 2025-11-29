@@ -27,19 +27,19 @@ MX² is the **cryptographic foundation** of the MAX identity system.
 
 ## ⭐ Features
 
-Portable ASCII-safe container
+• Portable ASCII-safe container
 
-Deterministic output
+• Deterministic output
 
-Based exclusively on standard, well-studied cryptography
+• Based exclusively on standard, well-studied cryptography
 
-Zero cloud dependency
+• Zero cloud dependency
 
-Suitable for QR encoding
+• Suitable for QR encoding
 
-Fully auditable by researchers
+• Fully auditable by researchers
 
-Reproducible across platforms
+• Reproducible across platforms
 
 
 ## ✨ What MX² does
