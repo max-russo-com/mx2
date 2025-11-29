@@ -111,8 +111,8 @@ Recommended schema:
 "device": "iPhone15,3",
 "format": "MX2:PC:V1"
 }
-}```
-
+}
+```
 
 Notes:
 
