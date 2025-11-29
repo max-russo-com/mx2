@@ -1,4 +1,4 @@
-# MX² — MAX to eXcryption Container
+# MX² — MAX 2 eXcryption Container
 
 ![Rust](https://img.shields.io/badge/Rust-1.74+-orange)
 ![XChaCha20-Poly1305](https://img.shields.io/badge/XChaCha20--Poly1305-AEAD-blue)
@@ -6,7 +6,7 @@
 ![License](https://img.shields.io/badge/License-MIT-yellow)
 
 
-**MX² (MAX to eXcryption)** is an open, verifiable, password-protected container format.  
+**MX² (MAX 2 eXcryption)** is an open, verifiable, password-protected container format.  
 It is used inside the MAX ecosystem to store **two long, high-entropy secret phrases** securely and reproducibly.
 
 These two phrases (`p1`, `p2`) allow the MAX App to deterministically reconstruct:
