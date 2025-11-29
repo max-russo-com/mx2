@@ -199,6 +199,44 @@ JSON MAXREC payload
 
 This allows full independent verification.
 
+### 🔄 Cross-Compatibility Tests (Desktop ↔ MAX App)
+
+This repository allows researchers to perform a **full interoperability test**
+between the open MX² implementation (this Rust code) and the MAX App.
+
+You can verify mathematically that the MAX App uses the exact same MX² format:
+
+- SHA-256 for deriving internal passcodes  
+- Argon2id (64 MiB, 3 iterations, 1 lane)  
+- XChaCha20-Poly1305 (AEAD, 24-byte nonce, 16-byte tag)  
+- JSON MAXREC payload  
+- `MX2:pc:v1` header  
+
+#### 📲 Download the MAX App (TestFlight)
+
+You can install the MAX App Beta here:
+
+👉 **https://testflight.apple.com/join/pc6PdFz5**
+
+*(The app is currently in Apple's review process. The link becomes active as soon as Apple approves the build.)*
+
+
+#### ✔️ Test 1 — Encrypt on desktop → decrypt in MAX App  
+Create an MX² container with this Rust tool (`cargo run`)  
+and import it inside the MAX App.  
+The MAX App will correctly decrypt the payload.
+
+#### ✔️ Test 2 — Encrypt in MAX App → decrypt on desktop  
+Create an MX² backup inside the MAX App.  
+Then use this repository to decrypt it on your computer.  
+The Rust implementation will correctly recover the JSON payload.
+
+These two tests provide **cryptographic transparency**:
+anyone can confirm that the MAX App truly implements MX² exactly as specified,
+without requiring access to any internal deterministic logic of MAX-ID.
+
+This level of interoperability is intentional:  
+MX² is designed to be **open, verifiable and reproducible** across platforms.
 
 ## 🔍 Independent verification
 
