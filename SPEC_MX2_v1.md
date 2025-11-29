@@ -125,10 +125,10 @@ Notes:
 The MX² process consists of password preprocessing,
 key derivation, AEAD encryption, and container assembly.
 
-### 6.1 Password preprocessing
+** 6.1 Password preprocessing
 passcodes = SHA-256(password)
 
-### 6.2 Key derivation
+** 6.2 Key derivation
 key32 = Argon2id(
     password,
     salt,
@@ -137,14 +137,14 @@ key32 = Argon2id(
     parallelism=1
 )
 
-### 6.3 Encryption
+** 6.3 Encryption
 ciphertext, tag = XChaCha20-Poly1305(
     key32,
     nonce,
     plaintext_json
 )
 
-### 6.4 Assembly
+** 6.4 Assembly
 header | salt_b64 | nonce_b64 | tag_b64 | ciphertext_b64
 
 ## 7. Determinism
