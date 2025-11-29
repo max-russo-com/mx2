@@ -102,15 +102,15 @@ MX² guarantees:
 
 ## 📁 Repository contents
 
-src/main.rs — command-line demo tool
+- src/main.rs — command-line demo tool
 
-SPEC_MX2_v1.md — technical specification for MX²
+- SPEC_MX2_v1.md — technical specification for MX²
 
-Cargo.toml — Rust crate definition
+- Cargo.toml — Rust crate definition
 
-LICENSE — MIT license
+- LICENSE — MIT license
 
-.gitignore — Rust standard ignores
+- .gitignore — Rust standard ignores
 
 ## 🧪 CLI Demo (Rust)
 
@@ -126,21 +126,21 @@ cargo run
 
 After running the tool, you will see a menu:
 
-Option 1: generate two new secret phrases and create an encrypted MX² backup
+• Option 1: generate two new secret phrases and create an encrypted MX² backup
 
-Option 2: decrypt an existing MX² backup and recover the stored phrases
+• Option 2: decrypt an existing MX² backup and recover the stored phrases
 
 The demo enforces the same password policy as the MAX App:
 
-at least 14 characters
+- at least 14 characters
 
-at least 1 lowercase
+- at least 1 lowercase
 
-at least 1 uppercase
+- at least 1 uppercase
 
-at least 3 digits
+- at least 3 digits
 
-at least 3 symbols
+- at least 3 symbols
 
 
 ## 🔐 Security Notes
