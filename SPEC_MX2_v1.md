@@ -35,16 +35,12 @@ The MX² container is built on strong, well-studied primitives:
 
 ## 2. Design goals
 
-- **Determinism** — same input → same output
-
-- **Portability** — works as string, file, QR
-
-- **Transparency** — all fields are inspectable
-
-- **Security** — modern, audit-ready primitives
-
-- **Minimalism** — no unnecessary metadata
-
+- **Determinism** — same input → same output  
+- **Portability** — works as string, file, QR  
+- **Interoperability** — same container across implementations (Rust, Swift, MAX App)  
+- **Transparency** — all fields are inspectable  
+- **Security** — modern, audit-ready primitives  
+- **Minimalism** — no unnecessary metadata  
 - **Independence** — reveals nothing about MAX-ID logic
 
 
@@ -106,63 +102,80 @@ The decrypted payload MUST be JSON.
 Recommended schema:
 ```
 {
-  "version": 1,
-  "phrases": "…",
-  "meta": {
-    "created_at": 1737811200,
-    "device": "iPhone15,3",
-    "format": "MX2:PC:V1"
-  }
+"type": "MAXREC",
+"v": 2,
+"ts": 1737811200,
+"p1": "…",
+"p2": "…",
+"meta": {
+"device": "iPhone15,3",
+"format": "MX2:PC:V1"
 }
-```
+}```
+
 
 Notes:
 
-- phrases contains the high-entropy secret
-
-- meta is optional
-
-- Version SHOULD be included for future migrations
+- `p1` and `p2` contain high-entropy secret phrases.
+- `meta` is optional.
+- The `v` field SHOULD be included for future migrations.
 
 ## 6. Cryptographic process
-**6.1 Deriving the key**
-key = Argon2id(phrases, salt, memory=64MiB, iterations=3, parallelism=1)
 
-**6.2 Encryption**
-ciphertext, tag = XChaCha20-Poly1305(key, nonce, plaintext)
+The MX² process consists of password preprocessing,
+key derivation, AEAD encryption, and container assembly.
 
-**6.3 Assembly**
+### 6.1 Password preprocessing
+passcodes = SHA-256(password)
+
+### 6.2 Key derivation
+key32 = Argon2id(
+    password,
+    salt,
+    memory=64MiB,
+    iterations=3,
+    parallelism=1
+)
+
+### 6.3 Encryption
+ciphertext, tag = XChaCha20-Poly1305(
+    key32,
+    nonce,
+    plaintext_json
+)
+
+### 6.4 Assembly
 header | salt_b64 | nonce_b64 | tag_b64 | ciphertext_b64
 
 ## 7. Determinism
 
 MX² is deterministic when:
 
-phrases are identical
+- phrases are identical
 
-salt is constant
+- salt is constant
 
-version V1 is unchanged
+- version V1 is unchanged
 
 In the MAX App:
 
-MX² for identity regeneration → deterministic
+- MX² for identity regeneration → deterministic
 
-MX² for Chat messaging → non-deterministic (uses FrodoKEM)
+- MX² for Chat messaging → non-deterministic (uses FrodoKEM)
 
 ## 8. Security considerations
 
-MX² does NOT contain private keys
+- MX² does NOT contain private keys
 
-MX² reveals nothing about MAX-ID
+- MX² reveals nothing about MAX-ID
 
-MX² MUST be treated as secret
+- MX² MUST be treated as secret
 
-JSON MUST NOT contain derivable keys
+- JSON MUST NOT contain derivable keys
 
-Rotate MX² if passphrases change
+- Rotate MX² if passphrases change
 
-Uses only proven primitives (Argon2id + XChaCha20-Poly1305)
+- Uses only proven primitives (Argon2id + XChaCha20-Poly1305)
 
 ## 9. Compatibility
 Current version
