@@ -20,6 +20,11 @@ These two phrases (`p1`, `p2`) allow the MAX App to deterministically reconstruc
 
 MX² is the **cryptographic foundation** of the MAX identity system.
 
+> **Why “MX²”?**  
+> The name has a dual meaning:  
+> • **“MAX to eXcryption”** — a transport layer from MAX identity to secure encryption  
+> • **“MAX level 2”** — the second cryptographic layer in the MAX architecture
+
 ## ⭐ Features
 
 Portable ASCII-safe container
@@ -306,4 +311,4 @@ See the LICENSE file for details.
 Massimo Russo
 https://www.max-russo.com
 
-MAX Ecosystem: PQC Login, PQC Chat, MAX Lock, MAX Signature, MAX Prime, MX².
+MAX Ecosystem: PQC Max Login, PQC Max Chat, MAX Lock, MAX Signature, MAX Prime, MX².
