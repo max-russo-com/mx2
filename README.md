@@ -261,4 +261,4 @@ See the LICENSE file for details.
 Massimo Russo
 https://www.max-russo.com
 
-MAX Ecosystem: PQC Login, PQC Chat, MAX Lock, MAX Signature, MAX Prime, MX², MAX OS.
+MAX Ecosystem: PQC Login, PQC Chat, MAX Lock, MAX Signature, MAX Prime, MX².
