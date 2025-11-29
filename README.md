@@ -39,7 +39,11 @@ Reproducible across platforms
 
 ## ✨ What MX² does
 
-MX² transforms **one user password** into a secure cryptographic container.  
+MX² uses a user password to **encrypt and protect** a JSON payload containing
+two long, high-entropy secret phrases (`p1`, `p2`).  
+The password **does not generate** these phrases — it only derives the key
+used to protect them.
+
 It performs the following steps:
 
 1. Derives **two internal passcodes** from the password (via SHA-256).  
@@ -64,19 +68,23 @@ Full specification:
 The MX² container is constructed through the following steps:
 
 ````
-password
-  ↓
-SHA-256 hex
-  ↓
-derive two passcodes
-  ↓
-Argon2id + salt  →  key32
-  ↓
-XChaCha20-Poly1305 (AEAD)
-  ↓
-salt + nonce + authenticated ciphertext
-  ↓
-MX2:pc:v1 container
+              [ Secret Phrases ]
+                  p1 , p2
+                    │
+                    ▼
+              JSON payload (MAXREC)
+                    │
+                    │  (encrypted by key32)
+                    │
+                    ▼
+
+password ───► SHA-256 ───► internal passcodes ───► Argon2id ───► key32
+                                                                     │
+                                                                     ▼
+                                                        XChaCha20-Poly1305
+                                                                     │
+                                                                     ▼
+                                                          MX2:pc:v1 container
 ````
 
 MX² guarantees:
