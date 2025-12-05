@@ -29,7 +29,7 @@ MX² is the **cryptographic foundation** of the MAX identity system.
 
 • Portable ASCII-safe container
 
-• Deterministic output
+• Deterministic format and key-derivation logic
 
 • Based exclusively on standard, well-studied cryptography
 
@@ -40,7 +40,6 @@ MX² is the **cryptographic foundation** of the MAX identity system.
 • Fully auditable by researchers
 
 • Reproducible across platforms
-
 
 ## ✨ What MX² does
 
@@ -94,11 +93,22 @@ password ───► SHA-256 ───► internal passcodes ───► Argon
 
 MX² guarantees:
 
-- Determinism  
-- Portability  
-- Auditability  
-- Modern cryptographic primitives  
-- Independence from the internal MAX-ID logic
+•	Reproducible format and key-derivation logic
+
+•	Portability across platforms and implementations
+
+•	Auditability of parameters and on-disk representation
+
+•	Use of modern, well-studied cryptographic primitives
+
+•	Independence from the internal MAX-ID logic
+
+#### Determinism vs randomness
+
+MX² is deterministic in its *format* and key-derivation logic: given the same password, parameters and JSON payload, an implementation will always derive the same key material and produce a structurally equivalent container.
+
+The encryption itself is randomized: each container uses a fresh random salt and XChaCha20-Poly1305 nonce, so two containers created from the same input will have different ciphertexts and tags. This is intentional and follows standard AEAD best practices.
+
 
 ## 📁 Repository contents
 
