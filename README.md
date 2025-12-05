@@ -7,23 +7,15 @@
 
 
 **MX² (MAX 2 eXcryption)** is an open, verifiable, password-protected container format.  
-It is used inside the MAX ecosystem to store **two long, high-entropy secret phrases** securely and reproducibly.
 
-These two phrases (`p1`, `p2`) allow the MAX App to deterministically reconstruct:
+MX² (MAX 2 eXcryption) is an open, verifiable, password-protected container format.  
+It stores two long, high-entropy secret phrases securely, reproducibly, and in a portable ASCII-safe structure.
 
-- **MAX-ID** (mathematical identity)  
-- **SPHINCS+** private key (PQC Login)  
-- **FrodoKEM** keypair (PQC Chat)  
-- **MAX Lock** encryption keys  
-- **MAX Signature** keys  
-- All deterministic MAX modules  
-
-MX² is the **cryptographic foundation** of the MAX identity system.
+The goal is to provide a deterministic format and key-derivation logic that works identically across platforms, while keeping encryption randomized and aligned with modern AEAD best practices (Argon2id + XChaCha20-Poly1305).
 
 > **Why “MX²”?**  
-> The name has a dual meaning:  
-> • **“MAX to eXcryption”** — a transport layer from MAX identity to secure encryption  
-> • **“MAX level 2”** — the second cryptographic layer in the MAX architecture
+> The name refers to a “second layer” (²) built on top of standard cryptographic primitives, where *M* and *X* indicate a minimal, extensible container format.  
+> The meaning is intentionally lightweight: MX² is simply a compact name for a portable encryption container.
 
 ## ⭐ Features
 
@@ -310,6 +302,23 @@ https://datatracker.ietf.org/doc/rfc4648/
 
 All cryptographic components used by MX² are open, standardized, and independently verifiable.
 
+## 🔗 Use inside the MAX ecosystem (optional context)
+
+MX² was originally designed as the local container for two long-term, high-entropy secret phrases used in a broader deterministic identity system (the MAX App).
+
+These two phrases (`p1`, `p2`) allow the MAX App to reproducibly derive:
+
+- **MAX-ID** (mathematical identity)  
+- **SPHINCS+** private key (PQC Login)  
+- **FrodoKEM** keypair (PQC Chat)  
+- **MAX Lock** encryption keys  
+- **MAX Signature** keys  
+- All deterministic MAX modules in the architecture
+
+This context is optional: MX² is a **standalone, general-purpose container format**.  
+The deterministic MAX-ID derivation logic is proprietary and **not part of this repository**.  
+MX² remains fully open, auditable, and independently verifiable.
+
 
 ## 📄 License
 
@@ -320,5 +329,3 @@ See the LICENSE file for details.
 
 Massimo Russo
 https://www.max-russo.com
-
-MAX Ecosystem: PQC Max Login, PQC Max Chat, MAX Lock, MAX Signature, MAX Prime, MX².
