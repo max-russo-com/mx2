@@ -8,7 +8,6 @@
 
 **MX² (MAX 2 eXcryption)** is an open, verifiable, password-protected container format.  
 
-MX² (MAX 2 eXcryption) is an open, verifiable, password-protected container format.  
 It stores two long, high-entropy secret phrases securely, reproducibly, and in a portable ASCII-safe structure.
 
 The goal is to provide a deterministic format and key-derivation logic that works identically across platforms, while keeping encryption randomized and aligned with modern AEAD best practices (Argon2id + XChaCha20-Poly1305).
