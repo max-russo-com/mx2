@@ -12,9 +12,6 @@ It stores two long, high-entropy secret phrases securely, reproducibly, and in a
 
 The goal is to provide a deterministic format and key-derivation logic that works identically across platforms, while keeping encryption randomized and aligned with modern AEAD best practices (Argon2id + XChaCha20-Poly1305).
 
-> **Why “MX²”?**  
-> The name refers to a “second layer” (²) built on top of standard cryptographic primitives, where *M* and *X* indicate a minimal, extensible container format.  
-> The meaning is intentionally lightweight: MX² is simply a compact name for a portable encryption container.
 
 ## ⭐ Features
 
@@ -317,6 +314,14 @@ These two phrases (`p1`, `p2`) allow the MAX App to reproducibly derive:
 This context is optional: MX² is a **standalone, general-purpose container format**.  
 The deterministic MAX-ID derivation logic is proprietary and **not part of this repository**.  
 MX² remains fully open, auditable, and independently verifiable.
+
+### Naming
+
+MX² originally stood for **“MAX to eXcryption”** and **“MAX level 2”** inside the MAX identity architecture.  
+The name reflects its role as the second cryptographic layer used to protect the two long-term secret phrases (`p1`, `p2`) that power all deterministic modules of the MAX App.
+
+This naming history is kept for completeness.  
+MX² remains a **standalone, general-purpose** container format, independent of any specific application.
 
 
 ## 📄 License
