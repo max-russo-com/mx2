@@ -249,6 +249,7 @@ without requiring access to any internal deterministic logic of MAX-ID.
 This level of interoperability is intentional:  
 MX² is designed to be **open, verifiable and reproducible** across platforms.
 
+
 ## 🔍 Independent verification
 
 Researchers can:
