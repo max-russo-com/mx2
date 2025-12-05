@@ -29,6 +29,17 @@ MX² is designed to be small, auditable, fully reproducible across platforms, an
 
 • Reproducible across platforms
 
+
+## 🎯 Why MX² exists
+
+MX² aims to provide a transparent and reproducible way to protect long-term secrets
+without relying on proprietary algorithms or platform-specific behaviour.
+
+It is **not** a password manager and does **not** generate the user’s secrets.
+
+MX² is simply a portable, auditable container built on Argon2id and XChaCha20-Poly1305.
+
+
 ## ✨ What MX² does
 
 MX² uses a user password to **encrypt and protect** a JSON payload containing
@@ -88,8 +99,6 @@ MX² guarantees:
 •	Auditability of parameters and on-disk representation
 
 •	Use of modern, well-studied cryptographic primitives
-
-•	Independence from the internal MAX-ID logic
 
 #### Determinism vs randomness
 
@@ -256,7 +265,6 @@ confirm the MAX App uses this exact container
 
 write compatible implementations
 
-This provides transparency without revealing proprietary MAX-ID logic.
 
 
 ## 🖥 Supported Platforms
@@ -298,7 +306,7 @@ https://datatracker.ietf.org/doc/rfc4648/
 
 All cryptographic components used by MX² are open, standardized, and independently verifiable.
 
-## 🔗 Use inside the MAX ecosystem (optional context)
+## 🔗 Optional: Use inside the MAX ecosystem
 
 MX² was originally designed as the local container for two long-term, high-entropy secret phrases used in a broader deterministic identity system (the MAX App).
 
