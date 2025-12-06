@@ -131,6 +131,7 @@ cargo run
 After running the tool, you will see a menu:
 
 • Option 1: generate two new secret phrases and create an encrypted MX² backup
+
 • Option 2: decrypt an existing MX² backup and recover the stored phrases
 
 The demo enforces the same password policy as the MAX App:
@@ -148,29 +149,29 @@ MX² uses modern, well-studied cryptographic primitives.
 
 **Password Hardening — Argon2id**
 
-memory: 64 MiB
-iterations: 3
-lanes: 1
-output: 32 bytes
+- memory: 64 MiB
+- iterations: 3
+- lanes: 1
+- output: 32 bytes
 
 **AEAD Encryption — XChaCha20-Poly1305**
 
-nonce: 24 bytes
-tag: 16 bytes
-AAD: "MAX|MX2|pc|v1"
+- nonce: 24 bytes
+- tag: 16 bytes
+- AAD: "MAX|MX2|pc|v1"
 
 **Randomness**
 
-Salt: 16 bytes
-Nonce: 24 bytes
-RNG: OsRng
+- Salt: 16 bytes
+- Nonce: 24 bytes
+- RNG: OsRng
 
 **Security properties**
 
-Fully authenticated encryption
-Stateless format
-No server involved
-No key material leaves the device
+- Fully authenticated encryption
+- Stateless format
+- No server involved
+- No key material leaves the device
 
 MX² is a secure building block, not a standalone key manager.
 
