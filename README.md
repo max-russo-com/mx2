@@ -40,6 +40,40 @@ It is **not** a password manager and does **not** generate the user’s secrets.
 MX² is simply a portable, auditable container built on Argon2id and XChaCha20-Poly1305.
 
 
+## 🔍 Why MX² Is Different
+
+Most cryptographic systems either:
+
+• store keys directly inside a vault  
+• derive a single key from a password (KDFs)  
+• or use a seed phrase tied to one specific ecosystem  
+
+MX² introduces a different model:
+
+**A password-protected, portable container that stores two high-entropy secret phrases  
+from which unlimited deterministic keys can be derived — for any purpose and on any implementation.**
+
+The password **only unlocks the container**.  
+The two phrases act as a **root secret**, enabling deterministic derivation of:
+
+• per-message encryption keys  
+• per-device or per-application keys  
+• post-quantum keypairs  
+• identity material  
+• long-term recovery flows  
+
+Because derivation is deterministic, MX² guarantees:
+
+• **infinite keys from a single root**  
+• **no private keys stored on disk**  
+• **long-term recoverability** (container + password = full regeneration)  
+• **interoperability** across independent implementations  
+• **auditability** without revealing internal secrets  
+
+MX² does not enforce how the phrases must be used.  
+It simply defines a **secure, portable, inspectable container** for storing them.
+
+
 ## ✨ What MX² does
 
 MX² uses a user password to **encrypt and protect** a JSON payload containing
