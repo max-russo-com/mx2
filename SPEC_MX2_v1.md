@@ -70,8 +70,7 @@ MX² **does not** prescribe any derivation mechanism — this is left to applica
 
 MX² only defines:
 
-> a secure, auditable, password-protected container
->
+> a secure, auditable, password-protected container  
 > for storing p1 and p2.
 
 
