@@ -252,3 +252,38 @@ Output:
 ciphertext, tag = XChaCha20-Poly1305_Encrypt(key32, nonce, plaintext, AAD)
 ```
 
+**7.4 Assembly**
+
+The final MX² container MUST be constructed as:
+
+```text
+MX2:PC:V1|salt_b64|nonce_b64|tag_b64|ciphertext_b64
+```
+
+
+## 8. Determinism
+
+**MX² is not deterministic as an encryption scheme.**
+
+- The **format** and **key derivation** are deterministic.
+- The final **ciphertext is randomized** because of nonce + salt.
+
+Thus:
+
+- Two MX² containers created from the same inputs MUST differ.
+- Implementations MUST NOT reuse nonce or salt.
+
+This follows AEAD best practices.
+
+
+## 9. Security Considerations (Non-Normative)
+
+- MX² does not contain private keys — only root secrets.  
+- p1 and p2 MUST be treated as highly sensitive values.  
+- MX² MUST be stored and transmitted securely.  
+- JSON payloads MUST NOT include derivable private keys.  
+- Changing p1 or p2 requires generating a new MX² container.  
+- The security of MX² depends on password strength and Argon2id parameters.
+
+
+
