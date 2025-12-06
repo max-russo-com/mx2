@@ -193,3 +193,62 @@ MAXREC = {
 - `p1` and `p2` MUST be high-entropy phrases (length ≥ 64 chars recommended).
 - `meta` MAY contain arbitrary non-critical fields.
 - Implementations MUST ignore unknown fields.
+
+
+## 7. Cryptographic Process (Normative)
+
+The MX² encryption pipeline consists of:
+
+1. Password preprocessing
+2. Key derivation
+3. AEAD encryption
+4. Assembly of the MX² container
+
+**7.1 Password Preprocessing**
+
+The password MUST be processed into two internal passcodes.
+
+A compliant scheme is:
+
+```text
+pass1 = SHA-256(password || "1")
+pass2 = SHA-256(password || "2")
+```
+
+Other domain-separated SHA-256 constructions MAY be used.
+
+**7.2 Key Derivation (Argon2id)**
+
+The encryption key MUST be derived using Argon2id with parameters:
+
+- memory: 64 MiB
+- iterations: 3
+- parallelism: 1
+- output: 32 bytes
+
+Formally:
+
+```text
+key32 = Argon2id(pass1, salt, memory=64MiB, iterations=3, parallelism=1)
+```
+
+`pass2` MAY be used by applications for additional domain separation but is not used by MX² itself.
+
+**7.3 AEAD Encryption (XChaCha20-Poly1305)**
+
+Plaintext: UTF-8 JSON (MAXREC)
+
+Associated Data (AAD):
+
+```text
+"MAX|MX2|PC|V1"
+```
+
+Nonce: 24 random bytes (MUST NOT repeat for the same key)
+
+Output:
+
+```text
+ciphertext, tag = XChaCha20-Poly1305_Encrypt(key32, nonce, plaintext, AAD)
+```
+
