@@ -302,3 +302,32 @@ Planned extensions:
 
 Implementations SHOULD support future version negotiation.
 
+
+## 11. Test Vector (Non-Normative Example)
+
+```text
+MX2:PC:V1|2sQ3QzF1zN0=|AAECAwQFBgcICQoLDA0ODxAREhM=|W7Rzuu9J6t5WZg==|p9S0P9uzp8DLiGsQmZq1zknHnNn0ZIqQ2xFZ2w==
+```
+
+This is a synthetic example and MUST NOT be interpreted as a valid container.
+
+
+## 12. Reference Implementations
+
+- Rust implementation (this repository)
+- Swift implementation (MAX App)
+- Python validator (planned)
+
+All implementations MUST adhere to this specification for interoperability.
+
+
+## 13. Changelog
+
+**v1.0 — Draft**
+
+- Defines the MX2:PC:V1 format
+- Defines MAXREC JSON structure
+- Defines password preprocessing
+- Defines Argon2id parameters
+- Defines AEAD encryption and AAD
+- Introduces normative and non-normative sections
