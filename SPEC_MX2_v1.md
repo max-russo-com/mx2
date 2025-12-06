@@ -273,7 +273,7 @@ Plaintext: UTF-8 JSON (MAXREC)
 Associated Data (AAD):
 
 ```text
-"MAX|MX2|PC|V1"
+"MAX|MX2|pc|v1"
 ```
 
 Nonce: 24 random bytes (MUST NOT repeat for the same key)
