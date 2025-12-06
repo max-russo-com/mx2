@@ -1,10 +1,10 @@
 # MX² Specification — Version 1 (MX2:PC:V1)
 
-Status: **Draft (Non-Normative Core)**
-Version: **1.0**
-Author: **Massimo Russo**
-Last update: **2025-12**
-License: **MIT**
+Status: **Draft (Non-Normative Core)**  
+Version: **1.0**  
+Author: **Massimo Russo**  
+Last update: **2025-12**  
+License: **MIT**  
 
 ## 1. Introduction
 
