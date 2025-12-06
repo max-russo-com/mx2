@@ -189,7 +189,7 @@ MAXREC = {
 
 **Requirements:**
 
-- 'type' MUST be "MAXREC".
-- 'p1' and 'p2' MUST be high-entropy phrases (length ≥ 64 chars recommended).
-- 'meta' MAY contain arbitrary non-critical fields.
+- `type` MUST be "MAXREC".
+- `p1` and `p2` MUST be high-entropy phrases (length ≥ 64 chars recommended).
+- `meta` MAY contain arbitrary non-critical fields.
 - Implementations MUST ignore unknown fields.
