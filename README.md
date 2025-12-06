@@ -339,9 +339,11 @@ MX² is designed to be **open, verifiable and reproducible** across platforms.
 ## 📄 License
 
 This project is released under the MIT License.
+
 See the LICENSE file for details.
 
 ## Author
 
 Massimo Russo
+
 https://www.max-russo.com
