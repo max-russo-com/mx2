@@ -1,4 +1,4 @@
-# MX² Specification — Version 1 (MX2:PC:V1)
+# MX² Specification — Version 1 (MX2:pc:v1)
 
 Status: **Draft (Non-Normative Core)**  
 Version: **1.0**  
@@ -24,7 +24,7 @@ The format is intentionally minimal and suitable for:
 - cross-platform interoperability
 
 This document defines:
-- the **MX2:PC:V1** container format
+- the **MX2:pc:v1** container format
 - the internal JSON record **(MAXREC)**
 - the password-based encryption mechanism
 - the normative requirements for compliant implementations.
@@ -124,12 +124,13 @@ A compliant implementation MUST satisfy:
 An MX² container MUST use the following structure:
 
 ```text
-MX2:PC:V1|salt_b64|nonce_b64|tag_b64|ciphertext_b64
+MX2:pc:v1|xchacha20poly1305|salt_b64|nonce_b64|tag_b64|ciphertext_b64
 ```
 
 Fields MUST be separated by the ASCII | character.
 
 All fields except the header MUST be base64-encoded.
+
 
 ## 5. Field Definitions
 
@@ -138,39 +139,49 @@ All fields except the header MUST be base64-encoded.
 Literal value:
 
 ```text
-MX2:PC:V1
+MX2:pc:v1
 ```
 
 Meaning:
 
 - **MX2**: container family
-- **PC**: Portable Container
-- **V1**: version 1 of the format
+- **pc**: Portable Container
+- **v1**: version 1 of the format
 
 Implementations MUST reject containers with an unknown version.
 
-**5.2 salt_b64**
+**5.2 Algorithm identifier**
+
+Literal value:
+xchacha20poly1305
+
+Meaning:
+The AEAD algorithm used for encryption.
+Implementations MUST reject any value different from "xchacha20poly1305".
+
+**5.3 salt_b64**
 
 - Base64 encoding of the Argon2id salt
 - MUST be 16–32 bytes (16 recommended)
 - MUST be unique per container
 
-**5.3 nonce_b64**
+**5.4 nonce_b64**
 
 - Base64 encoding of the XChaCha20 nonce
 - MUST be exactly 24 bytes
 - MUST be generated from a secure RNG
 - MUST NOT repeat under the same key
 
-**5.4 tag_b64**
+**5.5 tag_b64**
 
 - Base64 encoding of the 16-byte Poly1305 authentication tag
 
-**5.5 ciphertext_b64**
+**5.6 ciphertext_b64**
 
 - Base64 encoding of the AEAD ciphertext
 - MUST contain a JSON document (MAXREC)
 - MUST be produced using XChaCha20-Poly1305 AEAD
+
 
 ## 6. Internal JSON Payload (MAXREC)
 
@@ -186,7 +197,6 @@ MAXREC = {
   "meta": { ... } OPTIONAL  // non-normative
 }
 ```
-
 **Requirements:**
 
 - `type` MUST be "MAXREC".
@@ -257,7 +267,7 @@ ciphertext, tag = XChaCha20-Poly1305_Encrypt(key32, nonce, plaintext, AAD)
 The final MX² container MUST be constructed as:
 
 ```text
-MX2:PC:V1|salt_b64|nonce_b64|tag_b64|ciphertext_b64
+MX2:pc:v1|xchacha20poly1305|salt_b64|nonce_b64|tag_b64|ciphertext_b64
 ```
 
 
@@ -291,14 +301,14 @@ This follows AEAD best practices.
 Current version:
 
 ```text
-MX2:PC:V1
+MX2:pc:v1
 ```
 
 Planned extensions:
 
-- **MX2:PC:V2** — extended metadata
-- **MX2:PC:V3** — binary compact container
-- **MX2:EX:V1** — extended eXcryption container
+- **MX2:pc:v2** — extended metadata
+- **MX2:pc:v3** — binary compact container
+- **MX2:EX:v1** — extended eXcryption container
 
 Implementations SHOULD support future version negotiation.
 
@@ -306,7 +316,7 @@ Implementations SHOULD support future version negotiation.
 ## 11. Test Vector (Non-Normative Example)
 
 ```text
-MX2:PC:V1|2sQ3QzF1zN0=|AAECAwQFBgcICQoLDA0ODxAREhM=|W7Rzuu9J6t5WZg==|p9S0P9uzp8DLiGsQmZq1zknHnNn0ZIqQ2xFZ2w==
+MX2:pc:v1|xchacha20poly1305|2sQ3QzF1zN0=|AAECAwQFBgcICQoLDA0ODxAREhM=|W7Rzuu9J6t5WZg==|p9S0P9uzp8DLiGsQmZq1zknHnNn0ZIqQ2xFZ2w==
 ```
 
 This is a synthetic example and MUST NOT be interpreted as a valid container.
@@ -325,7 +335,7 @@ All implementations MUST adhere to this specification for interoperability.
 
 **v1.0 — Draft**
 
-- Defines the MX2:PC:V1 format
+- Defines the MX2:pc:v1 format
 - Defines MAXREC JSON structure
 - Defines password preprocessing
 - Defines Argon2id parameters
