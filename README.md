@@ -229,6 +229,9 @@ MX² uses modern, well-studied cryptographic primitives.
 
 MX² is a secure building block, not a standalone key manager.
 
+MX² does not attempt to solve key management, multi-device synchronization, or authenticated identity; it only defines a portable encrypted container format that other systems can build on.
+
+
 
 ## 🔍 Independent verification
 
