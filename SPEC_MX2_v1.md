@@ -30,7 +30,7 @@ the password-based encryption mechanism
 the normative requirements for compliant implementations.
 
 
-## 1.1 Security Model (High-Level Overview)
+## 1.1. Security Model (High-Level Overview)
 
 MX² uses a simple but powerful **three-layer trust model**:
 ```
@@ -70,6 +70,10 @@ MX² **does not** prescribe any derivation mechanism — this is left to applica
 
 MX² only defines:
 
-a secure, auditable, password-protected container
-for storing p1 and p2.
+> a secure, auditable, password-protected container
+> for storing p1 and p2.
+
+
+## 1.2. Why MX² Is Different
+
 
