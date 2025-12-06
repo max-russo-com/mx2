@@ -218,7 +218,6 @@ Researchers can:
 - verify Argon2id parameters
 - reproduce MX² containers
 - decrypt MAXREC payloads
-- confirm the MAX App uses this exact container
 - write compatible implementations
 
 The entire format is intentionally simple and fully auditable.
