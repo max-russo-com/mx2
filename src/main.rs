@@ -51,7 +51,7 @@ fn derive_two_passcodes_from_pwd(pwd: &str) -> (String, String) {
 /// MX2 ENCRYPTION (2 derived passcodes) — format identical to the MAX App:
 /// MX2:pc:v1|xchacha20poly1305|salt_b64|nonce_b64|tag_b64|ct_b64
 fn encrypt_phrase(plain: &str, p1: &str, p2: &str) -> Result<String> {
-    let mut salt  = [0u8; 16];// 16-byte salt, as recommended baseline in the SPEC (16–32 bytes allowed)
+    let mut salt  = [0u8; 16]; // 16-byte salt, as recommended baseline in the SPEC (16–32 bytes allowed)
     let mut nonce = [0u8; 24];
     let mut rng = OsRng;
     rng.fill_bytes(&mut salt);
