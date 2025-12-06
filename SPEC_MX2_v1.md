@@ -286,4 +286,19 @@ This follows AEAD best practices.
 - The security of MX² depends on password strength and Argon2id parameters.
 
 
+## 10. Compatibility and Versions
+
+Current version:
+
+```text
+MX2:PC:V1
+```
+
+Planned extensions:
+
+- **MX2:PC:V2** — extended metadata
+- **MX2:PC:V3** — binary compact container
+- **MX2:EX:V1** — extended eXcryption container
+
+Implementations SHOULD support future version negotiation.
 
