@@ -98,6 +98,25 @@ MX² guarantees:
 - **complete auditability**
 - **interoperability** across independent implementations
 
+## 1.3. Scope and Non-Goals
+
+MX² standardizes only the encrypted container format and the cryptographic mechanism used to protect the internal JSON record (MAXREC).
+
+Implementations and applications:
+
+- MUST treat p1 and p2 as application-level root secrets;
+- MAY derive p1 and p2 from user input in any way they choose (passwords, hardware tokens, local RNG, external systems, etc.);
+- MAY use p1 and p2 to derive a wide range of keys and identities.
+
+MX² explicitly does not define:
+
+- how p1 and p2 are generated or managed over time;
+- key management, rotation, or backup policies;
+- multi-device synchronization or account recovery flows;
+- user authentication, identity, or access control.
+
+These aspects are intentionally left to the surrounding application or ecosystem.
+
 
 ## 2. Normative Keywords
 
@@ -226,6 +245,9 @@ pass2 = SHA-256(password || "2")
 ```
 
 Other domain-separated SHA-256 constructions MAY be used.
+
+Implementations MAY also generate p1 and p2 independently of any password (for example, from a local CSPRNG or hardware source) and use the password solely as an encryption key for the container. MX² only requires that, once p1 and p2 exist, they are encoded into MAXREC and encrypted as specified.
+
 
 **7.2 Key Derivation (Argon2id)**
 
