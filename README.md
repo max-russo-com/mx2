@@ -214,20 +214,20 @@ MX² is a secure building block, not a standalone key manager.
 
 Researchers can:
 
-inspect the MX² format
-verify Argon2id parameters
-reproduce MX² containers
-decrypt MAXREC payloads
-confirm the MAX App uses this exact container
-write compatible implementations
+- inspect the MX² format
+- verify Argon2id parameters
+- reproduce MX² containers
+- decrypt MAXREC payloads
+- confirm the MAX App uses this exact container
+- write compatible implementations
 
 The entire format is intentionally simple and fully auditable.
 
 ## 🖥 Supported Platforms
 
-macOS
-Linux
-Windows (WSL recommended)
+- macOS
+- Linux
+- Windows (WSL recommended)
 
 
 ## 📚 Cryptography Standards & References
