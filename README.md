@@ -15,12 +15,18 @@ MX² is designed to be small, auditable, fully reproducible across platforms, an
 
 ## ⭐ Features
 
-• Portable ASCII-safe container,
-• Deterministic format and key-derivation logic,
+• Portable ASCII-safe container
+
+• Deterministic format and key-derivation logic
+
 • Based exclusively on standard, well-studied cryptography
+
 • Zero cloud dependency
+
 • Suitable for QR encoding
+
 • Fully auditable by researchers
+
 • Reproducible across platforms
 
 
@@ -43,7 +49,7 @@ used to protect them.
 
 Steps performed:
 
-1. Derives **two internal passcodes** from the password (via SHA-256).  
+1. Derives **two internal passcodes** from the password (via SHA-256). 
 2. Hardens the password using **Argon2id** (64 MiB, 3 iterations).  
 3. Encrypts the data using **XChaCha20-Poly1305 (AEAD)**.  
 4. Produces a portable ASCII-safe string:
@@ -87,8 +93,12 @@ password ───► SHA-256 ───► internal passcodes ───► Argon
 MX² guarantees:
 
 •	Reproducible format and key-derivation logic
+
+
 •	Portability across platforms and implementations
+
 •	Auditability of parameters and on-disk representation
+
 •	Use of modern, well-studied cryptographic primitives
 
 #### Determinism vs randomness
