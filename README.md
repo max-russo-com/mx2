@@ -74,6 +74,26 @@ MX² does not enforce how the phrases must be used.
 It simply defines a **secure, portable, inspectable container** for storing them.
 
 
+## 🔐 How MX² Works (High-Level Model)
+
+MX² uses a simple but powerful three-layer model:
+
+1. **Password** – the only secret the user must remember.  
+   It does *not* generate cryptographic material; it simply unlocks the container.
+
+2. **MX² Container** – a portable encrypted vault that stores a JSON record  
+   (named **MAXREC**) containing long-term secret material.  
+   The container is encrypted with key material derived from the password  
+   (via SHA-256 → Argon2id → XChaCha20-Poly1305).
+
+3. **Secret Phrases (p1, p2)** – two high-entropy phrases stored *inside* MAXREC.  
+   These phrases act as the **root secret**, allowing applications to deterministically  
+   derive unlimited encryption keys, authentication keys, or identity material.
+
+No private keys are stored on disk.  
+All keys are derived on demand from `p1` and `p2` and disappear after use.
+
+
 ## ✨ What MX² does
 
 MX² uses a user password to **encrypt and protect** a JSON payload containing
