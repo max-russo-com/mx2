@@ -92,8 +92,9 @@ The phrases are the root secret.
 
 MX² guarantees:
 
-no private keys stored on disk 
-unlimited key derivations from a single root 
-long-term recoverability 
-complete auditability 
-interoperability across independent implementations 
+no private keys stored on disk  
+unlimited key derivations from a single root  
+long-term recoverability  
+complete auditability  
+interoperability across independent implementations  
+ 
