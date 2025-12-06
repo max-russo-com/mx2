@@ -15,8 +15,8 @@ MX² is designed to be small, auditable, fully reproducible across platforms, an
 
 ## ⭐ Features
 
-• Portable ASCII-safe container
-• Deterministic format and key-derivation logic
+• Portable ASCII-safe container,
+• Deterministic format and key-derivation logic,
 • Based exclusively on standard, well-studied cryptography
 • Zero cloud dependency
 • Suitable for QR encoding
