@@ -76,4 +76,24 @@ MX² only defines:
 
 ## 1.2. Why MX² Is Different
 
+Most cryptographic systems:
 
+- store keys directly in a vault,
+- derive one deterministic key from a password, or
+- use a seed phrase tied to one specific ecosystem.
+
+MX² introduces a different model:
+
+> **A portable, password-protected container that stores two high-entropy secret phrases from  
+> which unlimited deterministic keys can be derived — for any purpose and on any implementation.**
+
+The password only opens the vault. 
+The phrases are the root secret.
+
+MX² guarantees:
+
+no private keys stored on disk 
+unlimited key derivations from a single root 
+long-term recoverability 
+complete auditability 
+interoperability across independent implementations 
