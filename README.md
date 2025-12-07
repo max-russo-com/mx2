@@ -402,8 +402,9 @@ https://www.max-russo.com
 
 Version 1.0
 
-• First public release of MX2:pc:v1  
-• Defined MAXREC JSON payload  
-• Introduced SHA-256 passcodes + Argon2id hardening  
-• AEAD encryption with XChaCha20-Poly1305  
-• Added reference CLI implementation  
+• First public specification of MX2:pc:v1  
+• Introduced the MAXREC structured JSON payload  
+• Added deterministic SHA-256 passcode derivation  
+• Added Argon2id password hardening (64 MiB, 3 iterations, 1 lane)  
+• Implemented the XChaCha20-Poly1305 AEAD container format  
+• Included a cross-platform Rust CLI for demonstration and testing  
