@@ -181,7 +181,7 @@ Implementations MUST reject any value different from "xchacha20poly1305".
 **5.3 salt_b64**
 
 - Base64 encoding of the Argon2id salt
-- MUST be 16–32 bytes (16 recommended)
+- MUST be exactly 16 bytes
 - MUST be unique per container
 
 **5.4 nonce_b64**
