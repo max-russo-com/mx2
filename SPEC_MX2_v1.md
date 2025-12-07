@@ -235,36 +235,71 @@ The MX² encryption pipeline consists of:
 
 **7.1 Password Preprocessing**
 
-The password MUST be processed into two internal passcodes.
 
-A compliant scheme is:
+The user password (a UTF-8 string) MUST be transformed into an internal byte string before Argon2id is applied.
+
+The reference construction used in this specification is:
+
+1. Compute the SHA-256 hash of the password and encode it as a 64-character lowercase hexadecimal string:
 
 ```text
-pass1 = SHA-256(password || "1")
-pass2 = SHA-256(password || "2")
+hex = SHA256(password)  // 64 hex chars
 ```
 
-Other domain-separated SHA-256 constructions MAY be used.
+2. Let
 
-Implementations MAY also generate p1 and p2 independently of any password (for example, from a local CSPRNG or hardware source) and use the password solely as an encryption key for the container. MX² only requires that, once p1 and p2 exist, they are encoded into MAXREC and encrypted as specified.
+```text
+first8 = the first 8 characters of hex
+last8  = the last 8 characters of hex
+```
+
+3. Derive two internal passcodes:
+
+```text
+pass1 = password || "•1" || first8
+pass2 = password || "•2" || last8
+```
+
+where all strings are encoded as UTF-8.
+
+4. Build a single internal byte string pwd_internal as:
+
+```text
+pwd_internal = "P1" || 0x00 || pass1 || 0x00 || "P2" || 0x00 || pass2
+```
+
+where "P1" and "P2" are ASCII strings and 0x00 is a single zero byte.
+
+This `pwd_internal` value is then used as the password input to Argon2id in Section 7.2.
+
+Alternative domain-separated SHA-256 constructions MAY be used in non-interoperable deployments, but implementations that wish to be compatible with the reference Rust and Swift code MUST reproduce this exact `pwd_internal` construction.
 
 
 **7.2 Key Derivation (Argon2id)**
 
-The encryption key MUST be derived using Argon2id with parameters:
+The encryption key MUST be derived using Argon2id with the following parameters:
 
-- memory: 64 MiB
-- iterations: 3
-- parallelism: 1
-- output: 32 bytes
+- memory: 64 MiB  
+- iterations: 3  
+- parallelism: 1  
+- output length: 32 bytes  
 
 Formally:
 
 ```text
-key32 = Argon2id(pass1, salt, memory=64MiB, iterations=3, parallelism=1)
+key32 = Argon2id(
+    password   = pwd_internal,
+    salt       = salt,
+    memory     = 64 MiB,
+    iterations = 3,
+    parallelism= 1,
+    outputLen  = 32
+)
 ```
 
-`pass2` MAY be used by applications for additional domain separation but is not used by MX² itself.
+where `pwd_internal` is defined in Section 7.1 and salt is a 16–32 byte random value generated from a secure RNG.
+
+Implementations that wish to decrypt containers produced by the reference code MUST derive key32 exactly as shown above.
 
 **7.3 AEAD Encryption (XChaCha20-Poly1305)**
 
