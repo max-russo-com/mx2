@@ -219,7 +219,7 @@ MAXREC = {
 **Requirements:**
 
 - `type` MUST be "MAXREC".
-- `p1` and `p2` MUST be high-entropy phrases (length ≥ 64 chars recommended).
+- p1 and p2 MUST be high-entropy secret phrases. The specification does not impose any minimum length: entropy requirements depend on the application.  
 - `meta` MAY contain arbitrary non-critical fields.
 - Implementations MUST ignore unknown fields.
 
