@@ -1,4 +1,5 @@
-# MX² — MAX 2 eXcryption Container
+# MX² — A Portable, Password-Protected XChaCha20-Poly1305 + Argon2id Container Format
+
 
 ![Rust](https://img.shields.io/badge/Rust-1.74+-orange)
 ![XChaCha20-Poly1305](https://img.shields.io/badge/XChaCha20--Poly1305-AEAD-blue)
@@ -28,6 +29,18 @@ MX² is designed to be small, auditable, fully reproducible across platforms, an
 • Fully auditable by researchers
 
 • Reproducible across platforms
+
+
+## Quick Start
+
+Encrypt a JSON file:
+cargo run -- encrypt secret.json
+
+Decrypt an MX2 container:
+cargo run -- decrypt secret.mx2
+
+Generate a new MX2 backup with two random phrases:
+cargo run
 
 
 ## 🎯 Why MX² exists
@@ -72,6 +85,18 @@ Because derivation is deterministic, MX² guarantees:
 
 MX² does not enforce how the phrases must be used.  
 It simply defines a **secure, portable, inspectable container** for storing them.
+
+
+## Use Cases
+
+MX2 can be used for:
+
+• portable encrypted backups  
+• QR-safe secret transport  
+• cross-platform password-based vaults  
+• deterministic key derivation in cryptographic systems  
+• offline recovery workflows  
+• reproducible secret containers for research and auditing  
 
 
 ## 🔐 How MX² Works (High-Level Model)
@@ -369,3 +394,14 @@ See the LICENSE file for details.
 Massimo Russo
 
 https://www.max-russo.com
+
+
+## Changelog
+
+Version 1.0
+
+• First public release of MX2:pc:v1  
+• Defined MAXREC JSON payload  
+• Introduced SHA-256 passcodes + Argon2id hardening  
+• AEAD encryption with XChaCha20-Poly1305  
+• Added reference CLI implementation  
