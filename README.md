@@ -33,13 +33,13 @@ MX² is designed to be small, auditable, fully reproducible across platforms, an
 
 ## Quick Start
 
-Encrypt a JSON file:
+Encrypt a JSON file:  
 cargo run -- encrypt secret.json
 
-Decrypt an MX2 container:
+Decrypt an MX2 container:  
 cargo run -- decrypt secret.mx2
 
-Generate a new MX2 backup with two random phrases:
+Generate a new MX2 backup with two random phrases:  
 cargo run
 
 
@@ -359,11 +359,13 @@ You can verify mathematically that the MAX App uses the exact same MX² format:
 - JSON MAXREC payload  
 - `MX2:pc:v1` header  
 
+
 #### 📲 Download the MAX App (TestFlight)
 
 You can install the MAX App Beta here:
 
 👉 **https://testflight.apple.com/join/pc6PdFz5**
+
 
 
 #### ✔️ Test 1 — Encrypt on desktop → decrypt in MAX App  
