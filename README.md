@@ -360,11 +360,11 @@ You can verify mathematically that the MAX App uses the exact same MX² format:
 - `MX2:pc:v1` header  
 
 
-#### 📲 Download the MAX App (TestFlight)
+#### 📲 Download the MAX App
 
-You can install the MAX App Beta here:
+You can install the MAX App here:
 
-👉 **https://testflight.apple.com/join/pc6PdFz5**
+👉 https://apps.apple.com/us/app/maxapp-vault-signature/id6757194479
 
 
 
